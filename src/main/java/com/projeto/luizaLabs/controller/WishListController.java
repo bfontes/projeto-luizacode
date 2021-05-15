@@ -27,14 +27,13 @@ public class WishListController {
     @Autowired
     private WishListService wishlistService;
 
-
     @ApiOperation(value="Adicionar um produto na wishlist")
     @ApiResponses(value={
             @ApiResponse(code=201,message= "Foi adicionado um novo produto na sua wishlist",response= Response.class),
             @ApiResponse(code=400,message="Requisição inválida",response=Response.class)
     })
     @PostMapping("/wishlist")
-    public ResponseEntity<WishList> adicionarNaWishlist(@RequestBody WishList wishlist) {
+    public ResponseEntity<WishList> adicionarProdutoNaWishlist(@RequestBody WishList wishlist) {
         try {
             WishList respostaWishList = wishlistService.adicionarWishList(wishlist);
             return new ResponseEntity<>(wishlistService.adicionarWishList(wishlist), HttpStatus.CREATED);
@@ -44,18 +43,32 @@ public class WishListController {
 
     }
 
-
     @ApiOperation(value="Retornar um produto da wishlist")
     @ApiResponses(value={
             @ApiResponse(code=200,message="Produto da wishlist retornado com sucesso",response= Response.class),
             @ApiResponse(code=400,message="Requisição inválida",response=Response.class)
     })
     @GetMapping("/wishlist/{id}")
-    public ResponseEntity<?> buscarNaWishlist(@PathVariable long id) {
-        try {
-            return new ResponseEntity<>(wishlistService.buscarWishListId(id), HttpStatus.OK);
-        } catch (Exception e) {
+    public ResponseEntity<?> buscarProdutosNaWishlist(@PathVariable long id_produto) {
+        try{
+            return  new ResponseEntity<>(wishlistService.buscarProductoWishlist(id_produto),HttpStatus.OK);
+        }catch (Exception e){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/wishlist/{id}")
+    @ApiResponses(value={
+            @ApiResponse(code=200,message="Produto da wishlist retornado com sucesso",response= Response.class),
+            @ApiResponse(code=400,message="Requisição inválida",response=Response.class)
+    })
+    public ResponseEntity<?> visualizarProdutosNaWishlist(@PathVariable long id_cliente){
+        try{
+            WishList existeCliente= wishlistService.buscarClienteWishlist(id_cliente);
+            return new ResponseEntity<>(wishlistService.)
+        }
+        catch (Exception e){
+
         }
     }
 
@@ -66,7 +79,7 @@ public class WishListController {
 //            @ApiResponse(code = 400, message = "Requisição inválida", response = Response.class)
 //    })
 //    @PutMapping("/wishlist/{id}")
-//    public ResponseEntity<WishList> atualizarWishlist(@PathVariable long id, WishList wishList) {
+//    public ResponseEntity<WishList> atualizarProdutoNaWishlist(@PathVariable long id, WishList wishList) {
 //        try {
 //            Optional<WishList> wishlistPosBusca = wishlistService.buscarWishListId(id);
 //            if (wishlistPosBusca.isPresent()) {
@@ -80,5 +93,17 @@ public class WishListController {
 //        }
 //
 //    }
+
+
+    @ApiOperation(value = "Deletar um produto na WishList")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Produto da wishlist deletado com sucesso", response = Response.class),
+            @ApiResponse(code = 404, message = "Produto não encontrado na wishlist", response = Response.class),
+            @ApiResponse(code = 400, message = "Requisição inválida", response = Response.class)
+    })
+    @DeleteMapping("/wishlist/{id_produto}/{id_cliente}")
+    public ResponseEntity<WishList> removerProdutoNaWishlist(@PathVariable long id_produto,@PathVariable long id_cliente){
+     Optional<Produto> existeProduto = pr
+    }
 
 }

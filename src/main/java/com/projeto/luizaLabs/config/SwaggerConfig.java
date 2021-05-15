@@ -33,7 +33,7 @@ public class SwaggerConfig {
                 "API REST desenvolvida para o projeto final no curso LuizaCode",
                 "1.0",
                 "Terms of service",
-                 new Contact("","",""),
+                 new Contact("QueensOfTheSolution","",""),
                 "Apcahe License Version 2.0", "https://www.apache.org/license.html", new ArrayList<VendorExtension>());
 
         return apiInfo;

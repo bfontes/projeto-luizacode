@@ -29,7 +29,7 @@ public class Produto  implements Serializable {
 
     @NotNull
     @Column(name ="preco")
-    private double preco;
+    private BigDecimal preco;
 
     //Getter and Setter
 
@@ -58,11 +58,11 @@ public class Produto  implements Serializable {
         this.descricao = descricao;
     }
 
-    public Double getPreco() {
+    public BigDecimal getPreco() {
         return preco;
     }
 
-    public void setPreco(Double preco) {
+    public void setPreco(BigDecimal preco) {
         this.preco = preco;
     }
 }

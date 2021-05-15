@@ -26,7 +26,7 @@ public class ClienteController {
             @ApiResponse(code=400,message="Requisição inválida",response=Response.class)
     })
     @PostMapping("/clientes")
-    public ResponseEntity<Cliente> addCliente(@RequestBody Cliente cliente) {
+    public ResponseEntity<Cliente> adicionarCliente(@RequestBody Cliente cliente) {
         try {
             Cliente respostaCliente = clienteService.adicionarCliente(cliente);
             return new ResponseEntity<>(clienteService.adicionarCliente(cliente), HttpStatus.CREATED);
