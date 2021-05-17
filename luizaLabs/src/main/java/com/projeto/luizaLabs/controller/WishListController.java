@@ -17,13 +17,14 @@ import com.projeto.luizaLabs.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
 public class WishListController {
-
+    private static final int MAXSIZE = 20;
     @Autowired
     private WishListService wishlistService;
     @Autowired
@@ -41,15 +42,22 @@ public class WishListController {
         return wishlistService.adicionarProdutosNaWishList(wishlist);
     }
 
-    @ApiOperation(value = "Retornar wishlist")
+    @ApiOperation(value = "Visualizar wishlist")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Wishlist retornada com sucesso", response = Response.class),
             @ApiResponse(code = 400, message = "Requisição inválida", response = Response.class)
     })
-    @GetMapping("/wishlist/{id}")//busca a wishlist pelo id
-    public WishList buscarWishList(@PathVariable(value = "id") long id) {
-        return wishlistService.buscarWishList(id);
+    @GetMapping("/wishlist")//wishlist pelo id
+      public List<WishList> visualizarWishList(){
+        Iterable<WishList> iterable = wishlistService.visualizarWishList();
+        List<WishList> wishLists = new ArrayList<>();
+        iterable.forEach(wishLists::add);
+        return wishLists;
     }
+
+//    public WishList visualizarWishList(@PathVariable(value = "id") long id) {
+//        return wishlistService. visualizarWishList(id);
+//    }
 
     /*@ApiOperation(value = "Retornar um produto da wishlist")
     @ApiResponses(value = {

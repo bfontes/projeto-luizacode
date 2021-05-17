@@ -20,7 +20,6 @@ public interface WishListRepository extends JpaRepository<WishList, Long> {
     //WishList findByCliente(Optional<Cliente> existeCliente);
     List<WishList> findByCliente(Optional<Cliente> existeCliente);
 
-
     /*@Query(value = "select p.* from Produto as p " +
     "inner join whishlist_produto as wp on wp.produto_id = p.ID " +
     "inner join whishlist as w on w.id = wp.WISH_LIST_ID " +

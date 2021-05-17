@@ -1,5 +1,6 @@
 package com.projeto.luizaLabs.service;
 
+import antlr.ASTNULLType;
 import com.projeto.luizaLabs.entity.Cliente;
 import com.projeto.luizaLabs.entity.Produto;
 import com.projeto.luizaLabs.entity.WishList;
@@ -7,6 +8,7 @@ import com.projeto.luizaLabs.repository.WishListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,20 +20,25 @@ public class WishListService {
     @Autowired
     private ClienteService clienteService;
 
+
     //Adicionar a lista no banco
     public WishList adicionarProdutosNaWishList(WishList wishlist){
         return wishListRepository.save(wishlist);
     }
 
-    //Buscar WishList
-    public WishList buscarWishList(long id) {
-        return wishListRepository.findById(id);
+
+    //Visualizar todos os produtos na WishList
+    public List<WishList> visualizarWishList(){
+        Iterable<WishList> iterable = wishListRepository.findAll();
+        List<WishList> wishLists = new ArrayList<>();
+        iterable.forEach(wishLists::add);
+        return wishLists;
     }
 
     /*public WishList buscarWishListPeloCliente(Cliente cliente) {
         return wishListRepository.findByCliente(cliente);
     }*/
-    //metodo para saber se o cliente existe
+    //Metodo para saber se o cliente existe
     public WishList findByClientId(Long id) {
 
         Optional<Cliente> existeCliente = clienteService.findById(id);
