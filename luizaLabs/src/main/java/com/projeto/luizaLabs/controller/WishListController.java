@@ -26,6 +26,10 @@ public class WishListController {
 
     @Autowired
     private WishListService wishlistService;
+    @Autowired
+    private ClienteService clienteService;
+    @Autowired
+    private ProdutoService produtoService;
 
     @ApiOperation(value = "Adicionar um produto na wishlist")
     @ApiResponses(value = {
@@ -75,7 +79,6 @@ public class WishListController {
 //    }
 
 
-
 //    public ResponseEntity<?>buscarProdutosNaWishList(@PathVariable long id_produto) {
 //        try{
 //            return  new ResponseEntity<Produto>(wishlistService.buscarProdutosNaWishList(id_produto),HttpStatus.OK);
@@ -109,14 +112,36 @@ public class WishListController {
 //    }
 
 
-//    @ApiOperation(value = "Deletar um produto na WishList")
-//    @ApiResponses(value = {
-//            @ApiResponse(code = 200, message = "Produto da wishlist deletado com sucesso", response = Response.class),
-//            @ApiResponse(code = 404, message = "Produto não encontrado na wishlist", response = Response.class),
-//            @ApiResponse(code = 400, message = "Requisição inválida", response = Response.class)
-//    })
-//    @DeleteMapping("/wishlist/{id_produto}/{id_cliente}")
-//    public ResponseEntity<WishList> removerProdutoNaWishlist(@PathVariable long id_produto,@PathVariable long id_cliente){
-//     Optional<Produto> existeProduto = pr
-//    }
+
+
+    @ApiOperation(value = "Deletar um produto na WishList")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Produto da wishlist deletado com sucesso", response = Response.class),
+            @ApiResponse(code = 404, message = "Produto não encontrado na wishlist", response = Response.class),
+            @ApiResponse(code = 400, message = "Requisição inválida", response = Response.class)
+    })
+    @DeleteMapping("/wishlist/cliente/{id_cliente}/produto/{id_produto}")
+    public ResponseEntity<WishList> removerProdutoNaWishlist(@PathVariable long id_produto, @PathVariable long id_cliente) {
+        try {
+            Optional<Cliente> existeCliente = clienteService.findById(id_cliente);
+            WishList wishList = wishlistService.findByClientId(id_cliente);
+            Optional<Produto> existeProduto = produtoService.findById(id_produto);
+
+            if (existeCliente.isEmpty())
+                return ResponseEntity.notFound().build();
+            if (wishList == null)
+                return ResponseEntity.notFound().build();
+            if (!existeProduto.isPresent())
+                return ResponseEntity.notFound().build();
+            if (!wishList.deletarProduto(existeProduto.get()))
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            wishList = wishlistService.adicionarProdutosNaWishList(wishList);
+            return ResponseEntity.ok().body(wishList);
+
+
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
 }

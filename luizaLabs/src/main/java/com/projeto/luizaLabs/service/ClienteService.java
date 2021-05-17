@@ -22,7 +22,6 @@ public class ClienteService {
     {
         return clienteRepository.findById(id);
     }
-
  
     public Cliente atualizarCliente(Cliente cliente)
     {

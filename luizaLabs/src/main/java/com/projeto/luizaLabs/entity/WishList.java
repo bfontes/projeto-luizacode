@@ -5,6 +5,7 @@ import com.sun.istack.NotNull;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -21,23 +22,36 @@ public class WishList  implements Serializable {
     @JoinColumn(name = "idCliente")
     private Cliente cliente;
 
-    @OneToMany
+//    @OneToMany //manytomany
+    @ManyToMany
     @Column(name = "idProduto")
-    private List<Produto> produto;
+    private List<Produto> produto = new ArrayList<>();
 
-    @NotNull
-    @Column(name = "total")
-    private BigDecimal total;
+//    @NotNull
+//    @Column(name = "total")
+//    private BigDecimal total;
+
+    public boolean deletarProduto(Produto produtos){
+        if(existeProduto(produtos)){
+            produto.remove(produtos);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean existeProduto(Produto produtos){
+        return produto.contains(produtos);
+    }
 
     //Getter and Setter
 
-    public BigDecimal getTotal() {
-        return total;
-    }
+//    public BigDecimal getTotal() {
+//        return total;
+//    }
 
-    public void setTotal(BigDecimal total) {
-        this.total = total;
-    }
+//    public void setTotal(BigDecimal total) {
+//        this.total = total;
+//    }
 
     public Long getId() {
         return Id;

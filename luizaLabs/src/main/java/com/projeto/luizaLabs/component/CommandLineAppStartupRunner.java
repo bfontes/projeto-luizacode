@@ -74,8 +74,8 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
         produto.add(create);
         wishlist.setCliente(clienteCarol);
         wishlist.setProduto(produto);
-        BigDecimal total = new BigDecimal(10);
-        wishlist.setTotal(total);
+//        BigDecimal total = new BigDecimal(10);
+//        wishlist.setTotal(total);
 
         wishlistService.adicionarProdutosNaWishList(wishlist);
     }
