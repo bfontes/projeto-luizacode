@@ -20,6 +20,7 @@ public class ProdutoController {
     @Autowired
     private ProdutoService produtoService;
 
+    // Adicionar Produto
     @ApiOperation(value = "Adicionar um novo produto")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Foi adicionado um novo produto", response = Response.class),
@@ -35,7 +36,7 @@ public class ProdutoController {
         }
     }
 
-
+    // Buscar produto pelo ID
     @ApiOperation(value = "Retornar um produto")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Produto retornado com sucesso", response = Response.class),
@@ -49,7 +50,10 @@ public class ProdutoController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+    // Buscar produto pelo nome
+        // criar se der tempo
 
+    // Atualizar o produto pelo
     @ApiOperation(value = "Atualizar um produto")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Produto retornado com sucesso", response = Response.class),

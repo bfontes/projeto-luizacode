@@ -20,12 +20,13 @@ public class ClienteController {
     @Autowired
     private ClienteService clienteService;
 
+    //Adicionar um cliente
     @ApiOperation(value = "Adicionar um novo usuário")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Foi adicionado um novo usuário", response = Response.class),
             @ApiResponse(code = 400, message = "Requisição inválida", response = Response.class)
     })
-    @PostMapping("/clientes")
+    @PostMapping("/cliente")
     public ResponseEntity<Cliente> adicionarCliente(@RequestBody Cliente cliente) {
         try {
             Cliente respostaCliente = clienteService.adicionarCliente(cliente);
@@ -35,12 +36,13 @@ public class ClienteController {
         }
     }
 
-    @ApiOperation(value = "Retornar um usuário")
+    //Buscar cliente pelo ID
+    @ApiOperation(value = "Buscar Cliente")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Usuário retornado com sucesso", response = Response.class),
             @ApiResponse(code = 400, message = "Requisição inválida", response = Response.class)
     })
-    @GetMapping("/clientes/{id}")
+    @GetMapping("/cliente/{id}")
     public ResponseEntity<?> buscarCliente(@PathVariable long id) {
         try {
             return new ResponseEntity<>(clienteService.buscarCliente(id), HttpStatus.OK);
@@ -49,7 +51,7 @@ public class ClienteController {
         }
     }
 
-
+    // Atualizar dados do Cliente
     @ApiOperation(value = "Atualizar cliente")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Return the user who was modified", response = Response.class),
@@ -71,25 +73,13 @@ public class ClienteController {
         }
     }
 
-
-//    public ResponseEntity<Cliente> atualizarCliente(@PathVariable long id, Cliente cliente) {
-//        try {
-//            Optional<Cliente> clientePosBusca = clienteService.buscarCliente(id);
-//            if (clientePosBusca.isPresent()) {
-//                cliente.setID(clientePosBusca.get().getID());
-//                return new ResponseEntity<>(clienteService.atualizarCliente(cliente), HttpStatus.NOT_FOUND);
-//            }
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        } catch (Exception e) {
-//            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-//}
-// }
-
     @ApiOperation(value="Retornar a quantidade de usuários")
     @ApiResponses(value={
             @ApiResponse(code=200,message="Quantidade de usuários retornado com sucesso",response= Response.class),
             @ApiResponse(code=400,message="Requisição inválida",response=Response.class)
     })
+
+    // Exibir total de clientes cadastrados
     @GetMapping("/qtdeclientes")
     public long  qtdeClientes() {
         return clienteService.quantidadeDeClientes();

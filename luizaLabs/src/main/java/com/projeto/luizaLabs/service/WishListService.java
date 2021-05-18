@@ -20,13 +20,10 @@ public class WishListService {
     @Autowired
     private ClienteService clienteService;
 
-
-    //Adicionar a lista no banco
-    public WishList adicionarProdutosNaWishList(WishList wishlist){
+    //Criar uma wishlist
+    public WishList criarWishList(WishList wishlist){
         return wishListRepository.save(wishlist);
     }
-
-
     //Visualizar todos os produtos na WishList
     public List<WishList> visualizarWishList(){
         Iterable<WishList> iterable = wishListRepository.findAll();
@@ -34,10 +31,6 @@ public class WishListService {
         iterable.forEach(wishLists::add);
         return wishLists;
     }
-
-    /*public WishList buscarWishListPeloCliente(Cliente cliente) {
-        return wishListRepository.findByCliente(cliente);
-    }*/
     //Metodo para saber se o cliente existe
     public WishList findByClientId(Long id) {
 
@@ -51,17 +44,4 @@ public class WishListService {
         return null;
     }
 
-    /*//Buscar produto na WishList
-    public Produto buscarProdutosNaWishList(long idCliente, long idProduto) {
-        return wishListRepository.buscarProdutoWishList(idCliente, idProduto);
-    }*/
-
-    //Visualizar produtos na wishlist
-//    public List<WishList> visualizarProdutosNaWishList(Produto produto) {
-//        return wishListRepository.findAll();
-//    }
-
-//    public WishList atualizarProdutoWishList(Object object) {
-//        return wishListRepository.save((WishList) object);
-//    }
 }

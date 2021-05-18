@@ -43,6 +43,10 @@ public class WishList  implements Serializable {
         return produto.contains(produtos);
     }
 
+    public void adicionarProdutoNaWishlist(Produto produtos){
+        this.produto.add(produtos);
+    }
+
     //Getter and Setter
 
 //    public BigDecimal getTotal() {

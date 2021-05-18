@@ -13,7 +13,6 @@ public class ProdutoService {
     @Autowired
     private ProdutoRepository produtoRepository;
 
-
     public Produto adicionarProduto(Produto produto) {
         return produtoRepository.save((Produto) produto);
     }
@@ -25,12 +24,16 @@ public class ProdutoService {
     public Produto atualizaProduto(Produto produto) {
         return produtoRepository.save((Produto) produto);
     }
+
     public Optional<Produto> findById(Long id) {
         return produtoRepository.findById(id);
     }
+
     public long quantidadeDeProdutos(){
         return produtoRepository.count();
     }
+
+
 
 
 }
