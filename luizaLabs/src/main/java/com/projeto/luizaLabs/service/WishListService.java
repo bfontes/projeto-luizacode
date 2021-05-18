@@ -1,8 +1,6 @@
 package com.projeto.luizaLabs.service;
 
-import antlr.ASTNULLType;
 import com.projeto.luizaLabs.entity.Cliente;
-import com.projeto.luizaLabs.entity.Produto;
 import com.projeto.luizaLabs.entity.WishList;
 import com.projeto.luizaLabs.repository.WishListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +22,12 @@ public class WishListService {
     public WishList criarWishList(WishList wishlist){
         return wishListRepository.save(wishlist);
     }
+
+    public WishList atualizarWishlist(Optional<WishList> wishlist){
+        return wishListRepository.save(wishlist);
+    }
+
+
     //Visualizar todos os produtos na WishList
     public List<WishList> visualizarWishList(){
         Iterable<WishList> iterable = wishListRepository.findAll();
@@ -31,17 +35,18 @@ public class WishListService {
         iterable.forEach(wishLists::add);
         return wishLists;
     }
-    //Metodo para saber se o cliente existe
-    public WishList findByClientId(Long id) {
 
-        Optional<Cliente> existeCliente = clienteService.findById(id);
-        if (existeCliente.isPresent()) {
-            List<WishList> listWishlist = wishListRepository.findByCliente(existeCliente);
-            if (!listWishlist.isEmpty()) {
-                return listWishlist.get(0);
-            }
-        }
-        return null;
+    //Metodo para saber se o cliente existe
+    public Optional<WishList> findByClientId(Long id) {
+//        Optional<Cliente> existeCliente = clienteService.findById(id);
+//        if (existeCliente.isPresent()) {
+//            List<WishList> listWishlist = wishListRepository.findByCliente(existeCliente);
+//            if (!listWishlist.isEmpty()) {
+//                return listWishlist.get(0);
+//            }
+//        }
+//        return null;
+        return wishListRepository.findByClienteId(id);
     }
 
 }

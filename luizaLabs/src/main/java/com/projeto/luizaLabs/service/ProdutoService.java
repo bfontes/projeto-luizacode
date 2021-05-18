@@ -33,7 +33,7 @@ public class ProdutoService {
         return produtoRepository.count();
     }
 
-
-
-
+    public Optional<Produto> findByNome(String  nome) {
+        return produtoRepository.findByNome(nome);
+    }
 }

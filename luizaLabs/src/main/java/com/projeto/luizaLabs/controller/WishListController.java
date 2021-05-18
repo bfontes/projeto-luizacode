@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import io.swagger.models.Response;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -49,9 +50,26 @@ public class WishListController {
                         // se tiver wishlist
                                 //adicionar produto na wishlist do cliente
 
-    @PostMapping("/wishlist")
-    public WishList adicionarProdutosNaWishlist(@RequestBody WishList wishlist) {
-        return wishlistService.criarWishList(wishlist);
+    @PutMapping("/wishlist/{id_cliente}/{id_produto}")
+    public ResponseEntity<WishList> adicionarProdutosNaWishlist(@PathVariable long id_cliente, @PathVariable long id_produto) {
+        //return wishlistService.criarWishList(wishlist);
+        try {
+            Optional<Cliente> cliente = clienteService.buscarCliente(id_cliente);
+            System.out.println(cliente);
+            if (cliente == null) {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            } else {
+                Optional<WishList> wishListDoCliente = wishlistService.findByClientId(id_cliente);
+                List<Produto> listaDeProdutoDoCliente = wishListDoCliente.get().getProduto();
+                Produto produtoAdicionado  = produtoService.buscarProduto(id_produto);
+                listaDeProdutoDoCliente.add(produtoAdicionado);
+                wishListDoCliente.get().setProduto(listaDeProdutoDoCliente);
+                wishlistService.atualizarWishlist(wishListDoCliente);
+                return new ResponseEntity<>(HttpStatus.OK);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @ApiOperation(value = "Visualizar wishlist")
@@ -120,4 +138,27 @@ public class WishListController {
         }
     }
 
+    // Consultar se um determinado produto esta na wishlist do cliente
+
+    @GetMapping("/wishlist/cliente/{id_cliente}/produto/{nome}")
+    public ResponseEntity<WishList> buscarProdutoNaWishlistCliente(@PathVariable long id_cliente, @RequestParam String nome) {
+        try {
+            Optional<Cliente> existeCliente = clienteService.findById(id_cliente);
+            WishList wishList = wishlistService.findByClientId(id_cliente);
+            Optional<Produto> produto = produtoService.findByNome(nome);
+
+            if (existeCliente.isEmpty())
+                return ResponseEntity.notFound().build();
+            if (wishList == null)
+                return ResponseEntity.notFound().build();
+            if (!produto.isPresent())
+                return ResponseEntity.notFound().build();
+            if (!wishList.existeProduto(produto.get()))
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return ResponseEntity.ok().body(wishList);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
 }
+

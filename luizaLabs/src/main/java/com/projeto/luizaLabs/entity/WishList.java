@@ -15,7 +15,7 @@ public class WishList  implements Serializable {
     private static final long SerialVersionUID = 1L;
 
     @javax.persistence.Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
     @OneToOne
@@ -39,6 +39,13 @@ public class WishList  implements Serializable {
         return false;
     }
 
+//    public boolean buscarProdutoNaWishlist(Produto produtos){
+//        if(existeProduto(produtos)){
+//            return true;
+//        }
+//        return false;
+//    }
+
     public boolean existeProduto(Produto produtos){
         return produto.contains(produtos);
     }
@@ -48,14 +55,6 @@ public class WishList  implements Serializable {
     }
 
     //Getter and Setter
-
-//    public BigDecimal getTotal() {
-//        return total;
-//    }
-
-//    public void setTotal(BigDecimal total) {
-//        this.total = total;
-//    }
 
     public Long getId() {
         return Id;
