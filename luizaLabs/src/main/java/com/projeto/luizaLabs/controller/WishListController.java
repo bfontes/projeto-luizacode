@@ -25,7 +25,8 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api")
 public class WishListController {
-    private static final int MAXSIZE = 20;
+    //private static final int MAXSIZE = 20;
+
     @Autowired
     private WishListService wishlistService;
     @Autowired
@@ -72,13 +73,17 @@ public class WishListController {
 
                 //pegar os produtos da wishlist
                 List<Produto> listaDeProdutoDoCliente = wishListDoCliente.getProduto();
-
+                //System.out.println(listaDeProdutoDoCliente.size());
                 //adiciona o produto na lista do cliente
-
+                if(listaDeProdutoDoCliente.size() >= 20)
+                {
+                    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                }
                 if (produtoAdicionado == null)
                     return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
                 listaDeProdutoDoCliente.add(produtoAdicionado);
+                System.out.println(listaDeProdutoDoCliente.size());
 
                 //atualiza a lista do cliente junto com o novo produto
                 wishListDoCliente.setProduto(listaDeProdutoDoCliente);

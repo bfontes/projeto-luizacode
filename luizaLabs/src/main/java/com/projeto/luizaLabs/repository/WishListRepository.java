@@ -15,7 +15,7 @@ import java.util.Optional;
 @Repository
 public interface WishListRepository extends JpaRepository<WishList, Long> {
 
-    WishList findById(long id);
+    Optional<WishList> findById(Long id);
 
     //WishList findByCliente(Optional<Cliente> existeCliente);
 

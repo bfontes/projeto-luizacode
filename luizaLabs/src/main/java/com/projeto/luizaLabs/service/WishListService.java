@@ -52,4 +52,6 @@ public class WishListService {
     public WishList procurarPeloIDCliente(long id) {
         return wishListRepository.findByClienteID(id);
     }
+
+
 }
