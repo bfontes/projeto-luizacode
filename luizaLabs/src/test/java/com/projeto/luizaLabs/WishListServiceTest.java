@@ -55,7 +55,7 @@ public class WishListServiceTest {
 
 
         WishList wishlistSalva = wishlistServiceTest.criarWishList(wishlist);
-        assertThat(wishlistSalva ).isNotNull();
+        assertThat(wishlistSalva).isNotNull();
     }
 
     @Test

@@ -25,7 +25,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api")
 public class WishListController {
-    //private static final int MAXSIZE = 20;
+    private static final int MAXSIZE = 20;
 
     @Autowired
     private WishListService wishlistService;
