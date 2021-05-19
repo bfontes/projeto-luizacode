@@ -62,9 +62,9 @@ public class ClienteController {
     @PutMapping("/cliente/{id}")
     public ResponseEntity<Cliente> atualizarCliente(@RequestBody Cliente pessoa, @PathVariable(value = "id") long id) {
         try {
-            Optional<Cliente> cliente = clienteService.findById(id);
-            if (cliente.isPresent()) {
-                pessoa.setID(cliente.get().getID());
+            Cliente cliente = clienteService.findById(id);
+            if (cliente != null) {
+                pessoa.setID(cliente.getID());
                 return new ResponseEntity<>((Cliente) clienteService.atualizarCliente(pessoa), HttpStatus.OK);
             }
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

@@ -11,6 +11,7 @@ import java.io.Serializable;
 public class Cliente implements Serializable {
 
     private static final long SerialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Long ID;

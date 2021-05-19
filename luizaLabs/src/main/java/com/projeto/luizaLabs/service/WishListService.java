@@ -23,10 +23,10 @@ public class WishListService {
         return wishListRepository.save(wishlist);
     }
 
-    public WishList atualizarWishlist(Optional<WishList> wishlist){
+    //Atualizar wishlist
+    public WishList atualizarWishlist(WishList wishlist){
         return wishListRepository.save(wishlist);
     }
-
 
     //Visualizar todos os produtos na WishList
     public List<WishList> visualizarWishList(){
@@ -37,16 +37,19 @@ public class WishListService {
     }
 
     //Metodo para saber se o cliente existe
-    public Optional<WishList> findByClientId(Long id) {
-//        Optional<Cliente> existeCliente = clienteService.findById(id);
-//        if (existeCliente.isPresent()) {
-//            List<WishList> listWishlist = wishListRepository.findByCliente(existeCliente);
-//            if (!listWishlist.isEmpty()) {
-//                return listWishlist.get(0);
-//            }
-//        }
-//        return null;
-        return wishListRepository.findByClienteId(id);
+    public WishList findByClientId(Long id) {
+        Cliente existeCliente = clienteService.findById(id);
+        if (existeCliente != null) {
+            List<WishList> listWishlist = wishListRepository.findByCliente(existeCliente);
+            if (!listWishlist.isEmpty()) {
+                return listWishlist.get(0);
+            }
+        }
+        return null;
     }
 
+    //Metodo para saber se o cliente existe
+    public WishList procurarPeloIDCliente(long id) {
+        return wishListRepository.findByClienteID(id);
+    }
 }

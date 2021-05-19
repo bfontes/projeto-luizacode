@@ -17,10 +17,9 @@ public class ClienteService {
         return clienteRepository.save(cliente);
     }
 
-    
-    public Optional<Cliente> buscarCliente(long id)
+    public Cliente buscarCliente(long id)
     {
-        return clienteRepository.findById(id);
+        return clienteRepository.findByID(id);
     }
  
     public Cliente atualizarCliente(Cliente cliente)
@@ -32,8 +31,7 @@ public class ClienteService {
         return clienteRepository.count();
     }
 
-    public Optional<Cliente> findById(Long id) {
-        return clienteRepository.findById(id);
+    public Cliente findById(Long id) {
+        return clienteRepository.findByID(id);
     }
-
 }

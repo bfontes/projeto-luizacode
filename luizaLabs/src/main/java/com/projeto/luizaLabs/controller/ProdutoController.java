@@ -50,10 +50,8 @@ public class ProdutoController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-    // Buscar produto pelo nome
-        // criar se der tempo
 
-    // Atualizar o produto pelo
+    // Atualizar o produto
     @ApiOperation(value = "Atualizar um produto")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Produto retornado com sucesso", response = Response.class),
@@ -63,9 +61,9 @@ public class ProdutoController {
     @PutMapping("/produto/{id}")
     public ResponseEntity<Produto> atualizarProduto(@RequestBody Produto produtoatualizado, @PathVariable(value = "id") long id) {
         try{
-            Optional<Produto> produto = produtoService.findById(id);
-            if(produto.isPresent()){
-                produtoatualizado.setID(produto.get().getID());
+            Produto produto = produtoService.buscarProduto(id);
+            if(produto != null){
+                produtoatualizado.setID(produto.getID());
                 return new ResponseEntity<>((Produto) produtoService.atualizaProduto(produtoatualizado), HttpStatus.OK);
             }
             return new
@@ -74,5 +72,4 @@ public class ProdutoController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
-
 }
