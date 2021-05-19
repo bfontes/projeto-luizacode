@@ -91,14 +91,14 @@ public class WishListController {
         }
     }
 
-    @ApiOperation(value = "Visualizar wishlist")
+    // Buscar todas as  wishLists cadastradas
+    @ApiOperation(value = "Visualizar todas as wishlists")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Wishlist retornada com sucesso", response = Response.class),
+            @ApiResponse(code = 200, message = "Wishlists retornadas com sucesso", response = Response.class),
             @ApiResponse(code = 400, message = "Requisição inválida", response = Response.class)
     })
 
-    // Buscar todas as  wishLists cadastradas
-    @GetMapping("/wishlist")//wishlist pelo id
+    @GetMapping("/wishlist")
       public List<WishList> visualizarWishList(){
         Iterable<WishList> iterable = wishlistService.visualizarWishList();
         List<WishList> wishLists = new ArrayList<>();
@@ -107,6 +107,12 @@ public class WishListController {
     }
 
    //Visualizar wishlist pelo Id do cliente
+   @ApiOperation(value = "Visualizar wishlist do cliente")
+   @ApiResponses(value = {
+           @ApiResponse(code = 200, message = "Wishlist retornada com sucesso", response = Response.class),
+           @ApiResponse(code = 400, message = "Requisição inválida", response = Response.class)
+   })
+
     @GetMapping("/wishlist/cliente/{id_cliente}")
     public ResponseEntity<WishList> visualizarWishListIdCliente(@PathVariable long id_cliente){
         try {
@@ -124,7 +130,7 @@ public class WishListController {
     }
 
     // Deletar um produto na WishList
-    @ApiOperation(value = "Deletar um produto na WishList")
+    @ApiOperation(value = "Deletar um produto na wishList")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Produto da wishlist deletado com sucesso", response = Response.class),
             @ApiResponse(code = 404, message = "Produto não encontrado na wishlist", response = Response.class),
@@ -152,7 +158,12 @@ public class WishListController {
     }
 
     // Consultar se um determinado produto esta na wishlist do cliente
-
+    @ApiOperation(value = "Consultar se produto está na wishlist do cliente")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Produto está na wishlist", response = Response.class),
+            @ApiResponse(code = 404, message = "Produto não está na wishlist", response = Response.class),
+            @ApiResponse(code = 400, message = "Requisição inválida", response = Response.class)
+    })
     @GetMapping("/wishlist/cliente/{id_cliente}/produto/{nome}")
     public ResponseEntity<WishList> buscarProdutoNaWishlistCliente(@PathVariable long id_cliente,@PathVariable(value = "nome") String nome) {
         try {

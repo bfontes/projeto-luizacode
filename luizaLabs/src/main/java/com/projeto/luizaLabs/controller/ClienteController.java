@@ -21,9 +21,9 @@ public class ClienteController {
     private ClienteService clienteService;
 
     //Adicionar um cliente
-    @ApiOperation(value = "Adicionar um novo usuário")
+    @ApiOperation(value = "Adicionar um novo cliente")
     @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "Foi adicionado um novo usuário", response = Response.class),
+            @ApiResponse(code = 201, message = "Foi adicionado um novo cliente", response = Response.class),
             @ApiResponse(code = 400, message = "Requisição inválida", response = Response.class)
     })
     @PostMapping("/cliente")
@@ -37,9 +37,9 @@ public class ClienteController {
     }
 
     //Buscar cliente pelo ID
-    @ApiOperation(value = "Buscar Cliente")
+    @ApiOperation(value = "Buscar cliente")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Usuário retornado com sucesso", response = Response.class),
+            @ApiResponse(code = 200, message = "Cliente retornado com sucesso", response = Response.class),
             @ApiResponse(code = 400, message = "Requisição inválida", response = Response.class)
     })
     @GetMapping("/cliente/{id}")
@@ -54,10 +54,9 @@ public class ClienteController {
     // Atualizar dados do Cliente
     @ApiOperation(value = "Atualizar cliente")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Return the user who was modified", response = Response.class),
-            @ApiResponse(code = 401, message = "You do not have permission to access this feature.", response = Response.class),
-            @ApiResponse(code = 404, message = "Log not found", response = Response.class),
-            @ApiResponse(code = 500, message = "An exception was thrown", response = Response.class),
+            @ApiResponse(code = 200, message = "Cliente atualizado com sucesso", response = Response.class),
+            @ApiResponse(code = 404, message = "Cliente não encontrado", response = Response.class),
+            @ApiResponse(code = 400, message = "Requisição inválida", response = Response.class),
     })
     @PutMapping("/cliente/{id}")
     public ResponseEntity<Cliente> atualizarCliente(@RequestBody Cliente pessoa, @PathVariable(value = "id") long id) {
@@ -73,9 +72,9 @@ public class ClienteController {
         }
     }
 
-    @ApiOperation(value="Retornar a quantidade de usuários")
+    @ApiOperation(value="Retornar a quantidade de clientes")
     @ApiResponses(value={
-            @ApiResponse(code=200,message="Quantidade de usuários retornado com sucesso",response= Response.class),
+            @ApiResponse(code=200,message="Quantidade de clientes retornado com sucesso",response= Response.class),
             @ApiResponse(code=400,message="Requisição inválida",response=Response.class)
     })
 

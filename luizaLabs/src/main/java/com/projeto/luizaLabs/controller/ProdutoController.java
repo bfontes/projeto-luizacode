@@ -54,7 +54,7 @@ public class ProdutoController {
     // Atualizar o produto
     @ApiOperation(value = "Atualizar um produto")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Produto retornado com sucesso", response = Response.class),
+            @ApiResponse(code = 200, message = "Produto atualizado com sucesso", response = Response.class),
             @ApiResponse(code = 404, message = "Produto não encontrado", response = Response.class),
             @ApiResponse(code = 400, message = "Requisição inválida", response = Response.class)
     })

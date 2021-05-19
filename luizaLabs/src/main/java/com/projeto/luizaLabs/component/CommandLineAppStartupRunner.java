@@ -65,8 +65,8 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
 
         //criando o produto
         Produto prod = new Produto();
-        prod.setNome("Geladeira");
-        prod.setDescricao("geladeira mais linda da nossa vida");
+        prod.setNome("Televisão");
+        prod.setDescricao("televisão mais linda da nossa vida");
         BigDecimal valor = new BigDecimal(10);
         prod.setPreco(valor);
         Produto create = produtoService.adicionarProduto(prod);
