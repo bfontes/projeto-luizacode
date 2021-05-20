@@ -45,8 +45,6 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
         Produto produto = new Produto();
         produto.setNome("Geladeira");
         produto.setDescricao("Essa geladeira é muito legal");
-        //Produto create  = produtoService.adicionarProduto(produto);
-        //produto.add(create);
 
         BigDecimal geladeira = new BigDecimal(1000);
         produto.setPreco(geladeira);
@@ -74,8 +72,6 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
         produto.add(create);
         wishlist.setCliente(clienteCarol);
         wishlist.setProduto(produto);
-//        BigDecimal total = new BigDecimal(10);
-//        wishlist.setTotal(total);
 
         wishlistService.criarWishList(wishlist);
     }

@@ -17,8 +17,6 @@ public interface WishListRepository extends JpaRepository<WishList, Long> {
 
     Optional<WishList> findById(Long id);
 
-    //WishList findByCliente(Optional<Cliente> existeCliente);
-
     List<WishList> findByCliente(Cliente existeCliente);
 
     WishList findByClienteID(Long id);

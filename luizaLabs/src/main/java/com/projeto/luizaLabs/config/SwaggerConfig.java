@@ -23,23 +23,6 @@ import static springfox.documentation.builders.PathSelectors.regex;
 @EnableSwagger2
 public class SwaggerConfig {
 
-//    //Personalização dos endpoints que serão exibidos no Swagger
-//    private List<ResponseMessage> responseMessageForGET()
-//    {
-//        return new ArrayList<ResponseMessage>() {{
-//            add(new ResponseMessageBuilder()
-//
-//                    .code(500)
-//                    .message("500 message")
-//                    .responseModel(new ModelRef("Error"))
-//                    .build());
-//            add(new ResponseMessageBuilder()
-//                    .code(403)
-//                    .message("Forbidden!")
-//                    .build());
-//        }};
-//    }
-
     @Bean
     public Docket api(){
         return new Docket(DocumentationType.SWAGGER_2)
@@ -48,8 +31,6 @@ public class SwaggerConfig {
                 .paths(regex("/api.*"))
                 .build()
                 .apiInfo(metaInfo());
-//                .useDefaultResponseMessages(false)
-//                .globalResponseMessage(RequestMethod.GET, responseMessageForGET());
         }
 
     private ApiInfo metaInfo(){
@@ -57,7 +38,8 @@ public class SwaggerConfig {
                 "API REST desenvolvida para o projeto final no curso LuizaCode",
                 "1.0",
                 "Terms of service",
-                 new Contact("QueensOfTheSolution","",""),
+                 new Contact("Ana Beatriz Fontes / Endi Gama / Gisele Manuel / Lavinia Souza / Nelismy Baro / Tatiane Costa",
+                         "","[fontesfbs, Idneamga8989, giselermanuel, laviniasouza1404, baronelismy, tatianecosta1995]@gmail.com"),
                 "Apcahe License Version 2.0", "https://www.apache.org/license.html", new ArrayList<VendorExtension>());
 
         return apiInfo;

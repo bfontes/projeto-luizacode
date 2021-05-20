@@ -51,7 +51,7 @@ public class ClienteController {
         }
     }
 
-    // Atualizar dados do Cliente
+    //Atualizar dados do Cliente
     @ApiOperation(value = "Atualizar cliente")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Cliente atualizado com sucesso", response = Response.class),
@@ -78,7 +78,7 @@ public class ClienteController {
             @ApiResponse(code=400,message="Requisição inválida",response=Response.class)
     })
 
-    // Exibir total de clientes cadastrados
+    //Exibir total de clientes cadastrados
     @GetMapping("/qtdeclientes")
     public long  qtdeClientes() {
         return clienteService.quantidadeDeClientes();

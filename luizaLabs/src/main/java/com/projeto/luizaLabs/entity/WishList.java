@@ -19,7 +19,6 @@ public class WishList  implements Serializable {
     @JoinColumn(name = "idCliente")
     private Cliente cliente;
 
-//  @OneToMany // manytomany
     @ManyToMany
     @Column(name = "idProduto")
     private List<Produto> produto = new ArrayList<>();
@@ -34,10 +33,6 @@ public class WishList  implements Serializable {
 
     public boolean existeProduto(Produto produtos){
         return produto.contains(produtos);
-    }
-
-    public void adicionarProdutoNaWishlist(Produto produtos){
-        this.produto.add(produtos);
     }
 
     //Getter and Setter

@@ -7,17 +7,21 @@ import com.projeto.luizaLabs.service.ClienteService;
 import com.projeto.luizaLabs.service.ProdutoService;
 import com.projeto.luizaLabs.service.WishListService;
 import org.junit.jupiter.api.Test;
+//import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+//import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@TestPropertySource("/application-test.properties")
 @SpringBootTest
 @Transactional
 public class WishListServiceTest {
@@ -55,7 +59,7 @@ public class WishListServiceTest {
 
 
         WishList wishlistSalva = wishlistServiceTest.criarWishList(wishlist);
-        assertThat(wishlistSalva ).isNotNull();
+        assertThat(wishlistSalva).isNotNull();
     }
 
     @Test

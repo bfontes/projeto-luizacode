@@ -25,7 +25,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api")
 public class WishListController {
-    //private static final int MAXSIZE = 20;
+    private static final int MAXSIZE = 20;
 
     @Autowired
     private WishListService wishlistService;
@@ -73,17 +73,22 @@ public class WishListController {
 
                 //pegar os produtos da wishlist
                 List<Produto> listaDeProdutoDoCliente = wishListDoCliente.getProduto();
-                //System.out.println(listaDeProdutoDoCliente.size());
-                //adiciona o produto na lista do cliente
-                if(listaDeProdutoDoCliente.size() >= 20)
-                {
-                    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-                }
+
                 if (produtoAdicionado == null)
                     return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
+                //verifica se produto já está na wishlist
+                for (int i = 0; i < listaDeProdutoDoCliente.size(); i++) {
+                    if (listaDeProdutoDoCliente.get(i) == produtoAdicionado)
+                        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+                }
+
+                //verifica se já existem 20 produtos na wishlist
+                if(listaDeProdutoDoCliente.size() >= 20)
+                    return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+                //adiciona o produto na lista do cliente
                 listaDeProdutoDoCliente.add(produtoAdicionado);
-                System.out.println(listaDeProdutoDoCliente.size());
 
                 //atualiza a lista do cliente junto com o novo produto
                 wishListDoCliente.setProduto(listaDeProdutoDoCliente);
@@ -96,7 +101,7 @@ public class WishListController {
         }
     }
 
-    // Buscar todas as  wishLists cadastradas
+    //Buscar todas as wishLists cadastradas
     @ApiOperation(value = "Visualizar todas as wishlists")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Wishlists retornadas com sucesso", response = Response.class),
@@ -134,8 +139,8 @@ public class WishListController {
         }
     }
 
-    // Deletar um produto na WishList
-    @ApiOperation(value = "Deletar um produto na wishList")
+    //Deletar um produto na WishList
+    @ApiOperation(value = "Deletar um produto na wishlist do cliente")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Produto da wishlist deletado com sucesso", response = Response.class),
             @ApiResponse(code = 404, message = "Produto não encontrado na wishlist", response = Response.class),
@@ -149,21 +154,21 @@ public class WishListController {
             Produto existeProduto = produtoService.buscarProduto(id_produto);
 
             if (existeCliente == null || wishList == null || existeProduto == null)
-                return ResponseEntity.notFound().build();
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
             if (!wishList.deletarProduto(existeProduto))
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
             wishList = wishlistService.criarWishList(wishList);
-            return ResponseEntity.ok().body(wishList);
+            return new ResponseEntity<>(wishList, HttpStatus.OK);
 
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 
-    // Consultar se um determinado produto esta na wishlist do cliente
-    @ApiOperation(value = "Consultar se produto está na wishlist do cliente")
+    //Consultar se um determinado produto está na wishlist do cliente
+    @ApiOperation(value = "Consultar se determinado produto está na wishlist do cliente")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Produto está na wishlist", response = Response.class),
             @ApiResponse(code = 404, message = "Produto não está na wishlist", response = Response.class),

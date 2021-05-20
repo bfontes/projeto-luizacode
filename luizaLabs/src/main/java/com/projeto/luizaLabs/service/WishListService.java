@@ -1,6 +1,7 @@
 package com.projeto.luizaLabs.service;
 
 import com.projeto.luizaLabs.entity.Cliente;
+import com.projeto.luizaLabs.entity.Produto;
 import com.projeto.luizaLabs.entity.WishList;
 import com.projeto.luizaLabs.repository.WishListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ public class WishListService {
     private WishListRepository wishListRepository;
     @Autowired
     private ClienteService clienteService;
+
+    private List<Produto> produto = new ArrayList<>();
 
     //Criar uma wishlist
     public WishList criarWishList(WishList wishlist){
@@ -52,6 +55,4 @@ public class WishListService {
     public WishList procurarPeloIDCliente(long id) {
         return wishListRepository.findByClienteID(id);
     }
-
-
 }
