@@ -14,9 +14,10 @@ import java.util.Optional;
 
 @Repository
 public interface WishListRepository extends JpaRepository<WishList, Long> {
-    WishList findById(long id);
-    //WishList findByCliente(Optional<Cliente> existeCliente);
-    List<WishList> findByCliente(Optional<Cliente> existeCliente);
 
-    Optional<WishList> findByClienteId(Long id);
+    Optional<WishList> findById(Long id);
+
+    List<WishList> findByCliente(Cliente existeCliente);
+
+    WishList findByClienteID(Long id);
 }

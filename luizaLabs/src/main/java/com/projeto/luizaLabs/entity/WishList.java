@@ -1,10 +1,7 @@
 package com.projeto.luizaLabs.entity;
 
-import com.sun.istack.NotNull;
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +11,7 @@ public class WishList  implements Serializable {
 
     private static final long SerialVersionUID = 1L;
 
-    @javax.persistence.Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
@@ -22,14 +19,9 @@ public class WishList  implements Serializable {
     @JoinColumn(name = "idCliente")
     private Cliente cliente;
 
-//    @OneToMany //manytomany
     @ManyToMany
     @Column(name = "idProduto")
     private List<Produto> produto = new ArrayList<>();
-
-//    @NotNull
-//    @Column(name = "total")
-//    private BigDecimal total;
 
     public boolean deletarProduto(Produto produtos){
         if(existeProduto(produtos)){
@@ -39,19 +31,8 @@ public class WishList  implements Serializable {
         return false;
     }
 
-//    public boolean buscarProdutoNaWishlist(Produto produtos){
-//        if(existeProduto(produtos)){
-//            return true;
-//        }
-//        return false;
-//    }
-
     public boolean existeProduto(Produto produtos){
         return produto.contains(produtos);
-    }
-
-    public void adicionarProdutoNaWishlist(Produto produtos){
-        this.produto.add(produtos);
     }
 
     //Getter and Setter

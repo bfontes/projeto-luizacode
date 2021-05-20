@@ -18,22 +18,18 @@ public class ProdutoService {
     }
 
     public Produto buscarProduto(long id) {
-        return produtoRepository.findById(id);
+        return produtoRepository.findByID(id);
     }
 
     public Produto atualizaProduto(Produto produto) {
         return produtoRepository.save((Produto) produto);
     }
 
-    public Optional<Produto> findById(Long id) {
-        return produtoRepository.findById(id);
-    }
-
     public long quantidadeDeProdutos(){
         return produtoRepository.count();
     }
 
-    public Optional<Produto> findByNome(String  nome) {
+    public Produto findByNome(String  nome) {
         return produtoRepository.findByNome(nome);
     }
 }

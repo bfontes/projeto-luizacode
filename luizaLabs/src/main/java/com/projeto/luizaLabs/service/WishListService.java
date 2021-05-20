@@ -1,6 +1,7 @@
 package com.projeto.luizaLabs.service;
 
 import com.projeto.luizaLabs.entity.Cliente;
+import com.projeto.luizaLabs.entity.Produto;
 import com.projeto.luizaLabs.entity.WishList;
 import com.projeto.luizaLabs.repository.WishListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,15 +19,17 @@ public class WishListService {
     @Autowired
     private ClienteService clienteService;
 
+    private List<Produto> produto = new ArrayList<>();
+
     //Criar uma wishlist
     public WishList criarWishList(WishList wishlist){
         return wishListRepository.save(wishlist);
     }
 
-    public WishList atualizarWishlist(Optional<WishList> wishlist){
+    //Atualizar wishlist
+    public WishList atualizarWishlist(WishList wishlist){
         return wishListRepository.save(wishlist);
     }
-
 
     //Visualizar todos os produtos na WishList
     public List<WishList> visualizarWishList(){
@@ -37,16 +40,19 @@ public class WishListService {
     }
 
     //Metodo para saber se o cliente existe
-    public Optional<WishList> findByClientId(Long id) {
-//        Optional<Cliente> existeCliente = clienteService.findById(id);
-//        if (existeCliente.isPresent()) {
-//            List<WishList> listWishlist = wishListRepository.findByCliente(existeCliente);
-//            if (!listWishlist.isEmpty()) {
-//                return listWishlist.get(0);
-//            }
-//        }
-//        return null;
-        return wishListRepository.findByClienteId(id);
+    public WishList findByClientId(Long id) {
+        Cliente existeCliente = clienteService.findById(id);
+        if (existeCliente != null) {
+            List<WishList> listWishlist = wishListRepository.findByCliente(existeCliente);
+            if (!listWishlist.isEmpty()) {
+                return listWishlist.get(0);
+            }
+        }
+        return null;
     }
 
+    //Metodo para saber se o cliente existe
+    public WishList procurarPeloIDCliente(long id) {
+        return wishListRepository.findByClienteID(id);
+    }
 }

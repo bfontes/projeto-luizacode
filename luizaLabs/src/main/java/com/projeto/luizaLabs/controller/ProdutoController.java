@@ -20,7 +20,7 @@ public class ProdutoController {
     @Autowired
     private ProdutoService produtoService;
 
-    // Adicionar Produto
+    //Adicionar Produto
     @ApiOperation(value = "Adicionar um novo produto")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Foi adicionado um novo produto", response = Response.class),
@@ -36,7 +36,7 @@ public class ProdutoController {
         }
     }
 
-    // Buscar produto pelo ID
+    //Buscar produto pelo ID
     @ApiOperation(value = "Retornar um produto")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Produto retornado com sucesso", response = Response.class),
@@ -50,29 +50,26 @@ public class ProdutoController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-    // Buscar produto pelo nome
-        // criar se der tempo
 
-    // Atualizar o produto pelo
+    //Atualizar o produto
     @ApiOperation(value = "Atualizar um produto")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Produto retornado com sucesso", response = Response.class),
+            @ApiResponse(code = 200, message = "Produto atualizado com sucesso", response = Response.class),
             @ApiResponse(code = 404, message = "Produto não encontrado", response = Response.class),
             @ApiResponse(code = 400, message = "Requisição inválida", response = Response.class)
     })
     @PutMapping("/produto/{id}")
     public ResponseEntity<Produto> atualizarProduto(@RequestBody Produto produtoatualizado, @PathVariable(value = "id") long id) {
-        try{
-            Optional<Produto> produto = produtoService.findById(id);
-            if(produto.isPresent()){
-                produtoatualizado.setID(produto.get().getID());
+        try {
+            Produto produto = produtoService.buscarProduto(id);
+            if(produto != null){
+                produtoatualizado.setID(produto.getID());
                 return new ResponseEntity<>((Produto) produtoService.atualizaProduto(produtoatualizado), HttpStatus.OK);
             }
             return new
                     ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }catch (Exception e){
+        } catch (Exception e){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
-
 }
