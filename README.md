@@ -126,8 +126,8 @@ Wishlist do cliente. Esse serviço deve atender os seguintes requisitos:
 
  <td align="center"><br>
         <a href="">
-            <img src="https://github.com/giselemanuel/teste-readme/blob/main/imagens/nelismy-barros.JPG" width="105px;" alt="Nelismy Barros" style="max-width:100%;">
-            <br><sub><b>Nelismy Barros</b></sub><br>
+            <img src="https://github.com/giselemanuel/teste-readme/blob/main/imagens/nelismy-barros.JPG" width="105px;" alt="Nelismy Baro" style="max-width:100%;">
+            <br><sub><b>Nelismy Baro</b></sub><br>
         <p align="center">
             </a>
             <a href="https://github.com/Tutta07">
