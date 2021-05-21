@@ -36,7 +36,7 @@ public class ClienteController {
         }
     }
 
-    //Buscar cliente pelo ID
+    //Buscar cliente pelo Id
     @ApiOperation(value = "Buscar cliente")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Cliente retornado com sucesso", response = Response.class),
