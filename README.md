@@ -43,12 +43,9 @@ Wishlist do cliente. Esse serviço deve atender os seguintes requisitos:
 - Consultar todos os produtos da Wishlist do cliente
 - Consultar se um determinado produto está na Wishlist do cliente
 
-## Configurações para utilizar o programa
-+ Java 8 ou superior
-+ JDK
-+ Maven
-+ Pycharm IDE
+## Acessando a plataforma Swagger
 
+:arrow_right:[CLIQUE AQUI PARA ACESSAR O PROGRAMA](https://queens-of-the-solution.herokuapp.com/swagger-ui.html#/) :arrow_left:
 
 ## Acessos aos Endpoints
 
