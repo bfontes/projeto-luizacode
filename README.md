@@ -45,7 +45,7 @@ Wishlist do cliente. Esse serviço deve atender os seguintes requisitos:
 
 ## Acessando a plataforma Swagger
 
-:arrow_right:[CLIQUE AQUI PARA ACESSAR O PROGRAMA](https://queens-of-the-solution.herokuapp.com/swagger-ui.html#/) :arrow_left:
+:arrow_right: [CLIQUE AQUI PARA ACESSAR O PROGRAMA](https://queens-of-the-solution.herokuapp.com/swagger-ui.html#/) :arrow_left:
 
 ## Acessos aos Endpoints
 
