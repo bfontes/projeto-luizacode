@@ -1,6 +1,6 @@
 <img src="https://github.com/giselemanuel/programa-Magalu-backend/blob/main/imagens/cabecalho-programa-magalu.jpeg" data-canonical-src="https://gyazo.com/eb5c5741b6a9a16c692170a41a49c858.png" width="20000" height="200" />
 
-## Programa de aceleração de desenvolvimento de desenvolvedoras backend
+## Programa de aceleração de desenvolvedoras backend
 
 + [Descrição do programa](https://github.com/giselemanuel/teste-readme#descrição-do-programa)  
 
